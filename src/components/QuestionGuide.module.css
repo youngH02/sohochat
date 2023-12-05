@@ -1,6 +1,6 @@
 .question_guide {
   min-width: 360px;
-  width: 100%;
+  /* width: 100%; */
   height: 150px;
   flex-shrink: 0;
 
@@ -9,8 +9,7 @@
   background: var(--white, #fff);
   box-shadow: 0px 3px 14px 0px rgba(200, 200, 200, 0.2);
 
-  margin: 60px auto;
-  position: fixed;
+  margin: 0 10px;
   /* overflow: hidden; */
   /* -ms-overflow-style: none; */
 }
