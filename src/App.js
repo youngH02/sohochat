@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import QAList from "./components/QAList";
 import QuestionGuide from "./components/QuestionGuide";
 
-const questionsSet = [
+const INITIAL_QUESTION_SET = [
   {
     question:
       "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
@@ -26,7 +26,7 @@ function reducer(state, action) {
 export const UserDispatch = createContext(null);
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, questionsSet);
+  const [state, dispatch] = useReducer(reducer, INITIAL_QUESTION_SET);
   return (
     <div className="App">
       <Header />

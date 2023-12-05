@@ -4,19 +4,16 @@ import { UserDispatch } from "../App";
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
-  const nowQ = useRef();
   const dispatch = useContext(UserDispatch);
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setInput(e.target.value);
   };
 
-  const onClick = () => {
-    console.log(nowQ.current.value);
-
+  const handleClick = () => {
     const qaSet = {
       //배열에 추가할 객체를 만들기
-      question: nowQ.current.value,
+      question: input,
       answer: "answertest",
     };
 
@@ -38,14 +35,13 @@ function QuestionGuide() {
       </p>
       <div>
         <input
-          ref={nowQ}
           name="question"
           type="text"
-          onChange={onChange}
+          onChange={handleChange}
           value={input}
           placeholder="질문을 입력해주세요."
         />
-        <button onClick={onClick}>
+        <button onClick={handleClick}>
           <img src="resources/send.png" alt="send icon" />
         </button>
       </div>

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import styles from "./Chat.module.css";
+import React from "react";
+import styles from "./QAList.module.css";
 
 const QA = function QA({ questionsSet }) {
   const { question, answer } = questionsSet;
