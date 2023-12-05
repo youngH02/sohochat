@@ -11,10 +11,11 @@ function reducer(state, action) {
       };
     case "SUCCESS":
       console.log("SUCCESS");
-      console.log(action.data);
+      //   console.log(action.data);
+      //   console.log(JSON.stringify(action.data));
       return {
         loading: false,
-        data: action.data,
+        data: JSON.stringify(action.data),
         error: null,
       };
     case "ERROR":
@@ -40,8 +41,6 @@ function useAsync(callback, deps = [], skip = false) {
     dispatch({ type: "LOADING" });
     try {
       const data = await callback(param);
-      console.log("====");
-      console.log(data);
       dispatch({ type: "SUCCESS", data });
     } catch (e) {
       dispatch({ type: "ERROR", error: e });

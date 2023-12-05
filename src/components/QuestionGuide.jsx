@@ -21,7 +21,7 @@ export async function openaiAPI(question) {
   // const response = await axios.get(
   //   `https://jsonplaceholder.typicode.com/users/${question}`
   // );
-  return Response.data;
+  return response.data;
 }
 
 function QuestionGuide() {
@@ -34,14 +34,22 @@ function QuestionGuide() {
     setInput(e.target.value);
   };
 
-  const handleClick = () => {
-    const answer = refetch(input);
+  const handleClick = async () => {
+    console.log(input);
+
+    await refetch(input);
     console.log("qaset");
+
+    const { loading, data, error } = state;
+    let answer = data;
+    if (error) answer = error;
+    if (!data) answer = "응답없음";
+
     console.log(answer);
     const qaSet = {
       //배열에 추가할 객체를 만들기
       question: input,
-      answer: answer.email,
+      answer: answer,
     };
     dispatch({ type: "ADD_QA", qaSet });
 
