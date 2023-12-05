@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./QuestionGuide.module.css";
 import { UserDispatch } from "../App";
 

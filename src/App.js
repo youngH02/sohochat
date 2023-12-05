@@ -12,6 +12,41 @@ const INITIAL_QUESTION_SET = [
       "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
   },
   { question: 2, answer: "ar" },
+  {
+    question:
+      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
+    answer:
+      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
+  },
+  { question: 2, answer: "ar" },
+  {
+    question:
+      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
+    answer:
+      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
+  },
+  { question: 2, answer: "ar" },
+  {
+    question:
+      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
+    answer:
+      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
+  },
+  { question: 2, answer: "ar" },
+  {
+    question:
+      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
+    answer:
+      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
+  },
+  { question: 2, answer: "ar" },
+  {
+    question:
+      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
+    answer:
+      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
+  },
+  { question: 2, answer: "ar" },
 ];
 
 function reducer(state, action) {
@@ -26,13 +61,13 @@ function reducer(state, action) {
 export const UserDispatch = createContext(null);
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, INITIAL_QUESTION_SET);
+  const [questionSet, dispatch] = useReducer(reducer, INITIAL_QUESTION_SET);
   return (
     <div className="App">
       <Header />
       <UserDispatch.Provider value={dispatch}>
         <QuestionGuide />
-        <QAList questionsSet={state} />
+        <QAList questionsSet={questionSet} />
       </UserDispatch.Provider>
     </div>
   );

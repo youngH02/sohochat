@@ -1,9 +1,9 @@
 .qalist {
   margin: 11px 0 0 0;
   text-align: left;
-  padding-top: 221px;
   overflow: auto;
   display: block;
+  height: calc(100vh - 221px);
 }
 
 .question,
