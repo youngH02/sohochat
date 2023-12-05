@@ -1,23 +1,29 @@
-import React from "react";
-const OPENAI_API_KEY = "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";
-const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
+// import axios from "axios";
+// import useAsync from "./useAsync";
 
-function OpenaiAPI() {
-  return <div></div>;
-}
+// async function api(question) {
+//   // const response = await axios.post(
+//   //   "http://localhost:3002/get-chatgpt-result-stream",
+//   //   {
+//   //     prompt: `${question}`,
+//   //     model: "chatgpt",
+//   //     uniqueid: "id-1701320901058-0.1831593819aa5",
+//   //   }
+//   // );
 
-export default OpenaiAPI;
+//   const response = await axios.get(
+//     `https://jsonplaceholder.typicode.com/users/${question}`
+//   );
+//   return Response.data;
+// }
 
-// curl https://api.openai.com/v1/models \
-//   -H "Authorization: Bearer " \
-//   -H "OpenAI-Organization: org-wSbEpnSVWEbHFw7UbQzM5Kz1"
+// function openaiAPI({ question }) {
+//   const [state] = useAsync(() => api(question), [question]);
 
-// $OPENAI_API_KEY=''
-// curl https://api.openai.com/v1/chat/completions \
-//   -H "Content-Type: application/json" \
-//   -H "Authorization: Bearer  \
-//   -d '{
-//      "model": "gpt-3.5-turbo-1106",
-//      "messages": [{"role": "user", "content": "Say this is a test!"}],
-//      "temperature": 0.7
-//    }'
+//   const { loading, data, error } = state;
+//   if (loading) return <div>데이터 생성중ㅁㄴㅇㄹㅁㄴㄹㅇㅁㄴ</div>;
+//   if (error) return "ERRRR";
+//   if (!data) return <div>데이터 생성중</div>;
+// }
+
+// export default openaiAPI;

@@ -2,21 +2,47 @@ import React, { useState, useContext } from "react";
 import styles from "./QuestionGuide.module.css";
 import { UserDispatch } from "../App";
 
+import axios from "axios";
+import useAsync from "./useAsync";
+
+export async function openaiAPI(question) {
+  const response = await axios.post(
+    "http://localhost:3002/get-chatgpt-result-stream",
+    {
+      // headers: {
+      //   "content-type": "application/json",
+      // },
+      prompt: "hello",
+      model: "chatgpt",
+      uniqueid: "id-1701320901058-0.1831593819aa5",
+      // "method": "POST",
+    }
+  );
+  // const response = await axios.get(
+  //   `https://jsonplaceholder.typicode.com/users/${question}`
+  // );
+  return Response.data;
+}
+
 function QuestionGuide() {
   const [input, setInput] = useState("");
   const dispatch = useContext(UserDispatch);
+
+  const [state, refetch] = useAsync(openaiAPI);
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
 
   const handleClick = () => {
+    const answer = refetch(input);
+    console.log("qaset");
+    console.log(answer);
     const qaSet = {
       //배열에 추가할 객체를 만들기
       question: input,
-      answer: "answertest",
+      answer: answer.email,
     };
-
     dispatch({ type: "ADD_QA", qaSet });
 
     setInput("");
