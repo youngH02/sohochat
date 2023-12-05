@@ -1,0 +1,42 @@
+.qalist {
+  margin: 11px 0 0 0;
+  text-align: left;
+  padding-top: 221px;
+  overflow: auto;
+  display: block;
+}
+
+.question,
+.answer {
+  width: 360px;
+  display: flex;
+
+  width: 100%;
+}
+.question {
+  flex-shrink: 0;
+  background: #f7f7f9;
+}
+
+.qalist img,
+.qatxt {
+  color: #2e2e30;
+  font-family: Noto Sans CJK KR;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  text-align: left;
+  vertical-align: middle;
+}
+
+.qalist img {
+  margin: 14px 0 14px 20px;
+  width: 28px;
+  height: 28px;
+}
+
+.qatxt {
+  margin: 14px 4px 14px 10.41px;
+}
