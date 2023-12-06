@@ -12,41 +12,6 @@ const INITIAL_QUESTION_SET = [
       "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
   },
   { question: 2, answer: "ar" },
-  {
-    question:
-      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
-    answer:
-      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
-  },
-  { question: 2, answer: "ar" },
-  {
-    question:
-      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
-    answer:
-      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
-  },
-  { question: 2, answer: "ar" },
-  {
-    question:
-      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
-    answer:
-      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
-  },
-  { question: 2, answer: "ar" },
-  {
-    question:
-      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
-    answer:
-      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
-  },
-  { question: 2, answer: "ar" },
-  {
-    question:
-      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
-    answer:
-      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
-  },
-  { question: 2, answer: "ar" },
 ];
 
 function reducer(state, action) {

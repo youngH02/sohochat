@@ -11,7 +11,7 @@ function reducer(state, action) {
       };
     case "SUCCESS":
       console.log("SUCCESS");
-      //   console.log(action.data);
+      console.log(action.data);
       //   console.log(JSON.stringify(action.data));
       return {
         loading: false,
@@ -38,9 +38,11 @@ function useAsync(callback, deps = [], skip = false) {
   });
 
   const fetchApi = async (param) => {
+    console.log("useasync fetch api");
     dispatch({ type: "LOADING" });
     try {
       const data = await callback(param);
+      console.log(data);
       dispatch({ type: "SUCCESS", data });
     } catch (e) {
       dispatch({ type: "ERROR", error: e });
@@ -48,7 +50,7 @@ function useAsync(callback, deps = [], skip = false) {
   };
 
   useEffect(() => {
-    if (skip) fetchApi();
+    // if (skip) fetchApi();
   }, deps);
 
   return [state, fetchApi];

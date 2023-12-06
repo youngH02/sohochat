@@ -5,23 +5,36 @@ import { UserDispatch } from "../App";
 import axios from "axios";
 import useAsync from "./useAsync";
 
-export async function openaiAPI(question) {
-  const response = await axios.post(
-    "http://localhost:3002/get-chatgpt-result-stream",
-    {
-      // headers: {
-      //   "content-type": "application/json",
-      // },
-      prompt: "hello",
-      model: "chatgpt",
-      uniqueid: "id-1701320901058-0.1831593819aa5",
-      // "method": "POST",
-    }
-  );
+async function openaiAPI(question) {
+  // const response = await axios.post(
+  //   "http://localhost:3002/get-chatgpt-result-stream",
+  //   {
+  //     // headers: {
+  //     //   "content-type": "application/json",
+  //     // },
+  //     prompt: "hello",
+  //     model: "chatgpt",
+  //     uniqueid: "id-1701320901058-0.1831593819aa5",
+  //     // "method": "POST",
+  //   }
+  // );
   // const response = await axios.get(
   //   `https://jsonplaceholder.typicode.com/users/${question}`
   // );
-  return response.data;
+  console.log("request api");
+  const response = await fetch(
+    "http://localhost:3002/get-chatgpt-result-stream",
+    {
+      headers: {
+        "content-type": "application/json",
+      },
+      body: '{"prompt":"hello","model":"chatgpt","uniqueid":"id-1701320901058-0.1831593819aa5"}',
+      method: "POST",
+    }
+  );
+  const returnRes = response.json();
+  console.log(returnRes);
+  return returnRes;
 }
 
 function QuestionGuide() {
@@ -35,13 +48,10 @@ function QuestionGuide() {
   };
 
   const handleClick = async () => {
-    console.log(input);
-
-    await refetch(input);
-    console.log("qaset");
+    let answer = await refetch(input);
 
     const { loading, data, error } = state;
-    let answer = data;
+    // let answer = data;
     if (error) answer = error;
     if (!data) answer = "응답없음";
 
