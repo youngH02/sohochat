@@ -1,37 +1,37 @@
 import React, { useState, useContext } from "react";
 import styles from "./QuestionGuide.module.css";
 import { UserDispatch } from "../App";
+import streamTest from "./StreamTest";
 
 // import axios from "axios";
 // import useAsync from "./useAsync";
 //https://chanhuiseok.github.io/posts/js-6/
 
-function requestStreamData(){
-
-}
-
 async function openaiAPI(question) {
-  // const response = await axios.get(
-  //   `https://jsonplaceholder.typicode.com/users/${question}`
-  // );
   console.log("request api");
+  
   try{
+
     const response = await fetch(
-      "http://localhost:3002/get-chatgpt-result-stream",
-      {
-        headers: {
-          "content-type": "application/json",
-        },
-         body: `{"prompt":${question},"model":"chatgpt","uniqueid":"id-1701320901058-0.1831593819aa5"}`,
-        method: "POST",
-      }
-    )
-    console.log(response);
+    `https://jsonplaceholder.typicode.com/users/2`
+  );
+
+  
+    // const response = await fetch(
+    //   "http://localhost:3002/get-chatgpt-result-stream",
+    //   {
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //      body: `{"prompt":${question},"model":"chatgpt","uniqueid":"id-1701320901058-0.1831593819aa5"}`,
+    //     method: "POST",
+    //   }
+    // )
+
     if(response.ok){
-      const returnRes = response.json();
-      console.log("res>>>>>>>")
-      console.log(returnRes);
-      return returnRes;
+      const test = await response.json();
+      // console.log(test)
+      return JSON.stringify(test);
     }else{
       throw new Error(response.type)
     }
@@ -42,35 +42,6 @@ async function openaiAPI(question) {
   }
   
 }
-
-const streamTest = (e) =>{
-
-const stream = new ReadableStream({
-  start(controller) {
-    console.log("start");
-    let num = 0;
-
-    const interval = setInterval(() => {
-      controller.enqueue(num++);
-      if (num === 10) {
-        controller.close();
-        clearInterval(interval);
-      }
-    }, 1_000);
-
-
-
-  },
-});
-
-  const reader = stream.getReader();
-reader.read().then(function print({ done, value }) {
-  if (done) return console.log("done");
-  console.log({ value });
-  reader.read().then(print);
-});
-}
-
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
@@ -91,6 +62,7 @@ function QuestionGuide() {
     // if (!data) answer = "응답없음";
 
     let answer = await openaiAPI(input)
+    console.log(answer)
     const qaSet = {
       //배열에 추가할 객체를 만들기
       question: input,
