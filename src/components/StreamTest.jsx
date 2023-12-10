@@ -15,10 +15,30 @@ function readAllChunks(readableStream) {
   return pump();
 }
 
+async function readData(url=`https://jsonplaceholder.typicode.com/users/2`) {
+  const response = await fetch(url);
+  for await (const chunk of response.body) {
+    // Do something with each "chunk"
+  }
+  // Exit when done
+}
+
+async function streamTest2(){
+  const response = await fetch(`https://jsonplaceholder.typicode.com/users/2`);
+  const reader = response.body.getReader();
+
+while (true) {
+  const {value, done} = await reader.read();
+  if (done) break;
+  console.log('Received', value);
+}
+
+console.log('Response fully received');
+}
+
 async function streamTest1(){
 
-    fetch(`https://jsonplaceholder.typicode.com/users/2`)
-  // Retrieve its body as ReadableStream
+  let response =  fetch(`https://jsonplaceholder.typicode.com/users/2`)
   .then((response) => response.body)
   .then((body) => {
     const reader = body.getReader();
@@ -30,14 +50,13 @@ async function streamTest1(){
         return pump();
 
         function pump() {
+          
           return reader.read().then(({ done, value }) => {
-            // When no more data needs to be consumed, close the stream
+            console.log(value)
             if (done) {
               controller.close();
               return;
             }
-
-            // Enqueue the next data chunk into our target stream
             controller.enqueue(value);
             return pump();
           });
@@ -46,8 +65,8 @@ async function streamTest1(){
     });
   })
   .then((stream) => new Response(stream))
-  .then((response) => response.blob())
-  .then((blob) => URL.createObjectURL(blob))
+  // .then((response) => response.blob())
+  // .then((blob) => URL.createObjectURL(blob))
   // .then((url) => console.log((image.src = url)))
   .catch((err) => console.error(err));
 
@@ -79,4 +98,4 @@ reader.read().then(function print({ done, value }) {
 });
 }
 
-export default streamTest1;
+export default streamTest;

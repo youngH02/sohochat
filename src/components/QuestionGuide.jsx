@@ -7,6 +7,36 @@ import streamTest from "./StreamTest";
 // import useAsync from "./useAsync";
 //https://chanhuiseok.github.io/posts/js-6/
 
+async function test(){
+  const response = await fetch(`https://jsonplaceholder.typicode.com/users/2`);
+  const reader = response.body.getReader();
+
+// while (true) {
+//   const {value, done} = await reader.read();
+//   if (done) break;
+//   console.log('Received', value);
+// }
+
+return new ReadableStream({
+      
+      start(controller) {
+        console.log("readstart")
+        return pump();
+
+        function pump() {
+          
+          return reader.read().then(({ done, value }) => {
+            if (done) {
+              controller.close();
+              return;
+            }
+            controller.enqueue(value);
+            return pump();
+          });
+        }
+      },
+    });
+}
 async function openaiAPI(question) {
   console.log("request api");
   
@@ -45,6 +75,7 @@ async function openaiAPI(question) {
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
+  const [answer, setAnswer] = useState("");
   const dispatch = useContext(UserDispatch);
 
   // const [state, refetch] = useAsync(openaiAPI);
@@ -61,8 +92,21 @@ function QuestionGuide() {
     // if (error) answer = error;
     // if (!data) answer = "응답없음";
 
-    let answer = await openaiAPI(input)
+  const stream = await test(input)
+  let voca = "";
+   const reader = stream.getReader();
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      console.log("done");
+      break;
+    }
+    const voca = new TextDecoder().decode(value);
+    console.log(JSON.stringify(voca));
+    setAnswer(JSON.stringify(voca))
     console.log(answer)
+  }
+
     const qaSet = {
       //배열에 추가할 객체를 만들기
       question: input,
