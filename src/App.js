@@ -6,19 +6,26 @@ import QuestionGuide from "./components/QuestionGuide";
 
 const INITIAL_QUESTION_SET = [
   {
-    question:
-      "1. 테스트질문테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas응답ddddddddddddadsafas",
+    id: 1,
+    question: "유플러스 우리가게 패키지에 대해서 알려줘",
     answer:
-      "1. 테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답테스트 응답",
+      "유플러스에서 제공하는 우리가게패키지는 온라인 비즈니스를 운영하는 소상공인 및 개인사업자들이 온라인상으로 자신의 상품 및 서비스를 판매할 수 있도록 돕는 서비스입니다.",
   },
-  { question: 2, answer: "ar" },
 ];
 
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_QA":
       if (action.qaSet.question === "") return state;
-      else return state.concat(action.qaSet);
+      return state.concat({ id: state.length + 1, ...action.qaSet });
+    case "ADD_ANSWER":
+      // console.log(state);
+      return state.map((set) =>
+        set.id === state.length
+          ? { ...set, answer: set.answer + action.set.answer }
+          : set
+      );
+
     default:
       return state;
   }
