@@ -1,16 +1,13 @@
 import React, { useState, useContext } from "react";
 import styles from "./QuestionGuide.module.css";
 import { UserDispatch } from "../App";
-import streamTest from "./StreamTest";
-
+//import streamTest from "./StreamTest";
 // import axios from "axios";
 // import useAsync from "./useAsync";
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
   const dispatch = useContext(UserDispatch);
-
-  // const [state, refetch] = useAsync(openaiAPI);
 
   async function requestChat(input) {
     console.log("requestChat");
