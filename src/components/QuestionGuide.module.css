@@ -75,7 +75,8 @@
   border: none;
   outline: none;
   float: left;
-  margin: 14.6px auto 14.4px 11px;
+  width: 80%;
+  margin: 14.6px 11px 14.4px 11px;
 }
 
 .question_guide button {
