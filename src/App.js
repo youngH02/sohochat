@@ -13,12 +13,13 @@ const INITIAL_QUESTION_SET = [
   },
 ];
 
+const ACTION = { ADD_QA: "ADD_QA", ADD_ANSWER: "ADD_ANSER" };
 function reducer(state, action) {
   switch (action.type) {
-    case "ADD_QA":
+    case ACTION["ADD_QA"]:
       if (action.qaSet.question === "") return state;
       return state.concat({ id: state.length + 1, ...action.qaSet });
-    case "ADD_ANSWER":
+    case ACTION["ADD_ANSWER"]:
       // console.log(state);
       return state.map((set) =>
         set.id === state.length
@@ -45,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export { App as default, ACTION };

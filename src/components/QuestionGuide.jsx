@@ -1,16 +1,12 @@
 import React, { useState, useContext } from "react";
 import styles from "./QuestionGuide.module.css";
-import { UserDispatch } from "../App";
-//import streamTest from "./StreamTest";
-// import axios from "axios";
-// import useAsync from "./useAsync";
+import { ACTION, UserDispatch } from "../App";
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
   const dispatch = useContext(UserDispatch);
 
   async function requestChat(input) {
-    console.log("requestChat");
     const response = await fetch(
       "http://localhost:3002/get-chatgpt-result-stream",
       {
@@ -31,7 +27,7 @@ function QuestionGuide() {
         return;
       } else {
         const answer = new TextDecoder().decode(value);
-        dispatch({ type: "ADD_ANSWER", set: { question: input, answer } });
+        dispatch({ type: ACTION.ADD_ANSWER, set: { question: input, answer } });
       }
       return reader.read().then(pump);
     });
@@ -47,7 +43,7 @@ function QuestionGuide() {
       answer: "",
     };
 
-    dispatch({ type: "ADD_QA", qaSet });
+    dispatch({ type: ACTION.ADD_QA, qaSet });
     await requestChat(input);
     setInput("");
   };
