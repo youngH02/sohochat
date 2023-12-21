@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import QAList from "./components/QAList";
 import QuestionGuide from "./components/QuestionGuide";
+import { useQuestionStore } from "./store";
 
 const INITIAL_QUESTION_SET = [
   {
@@ -34,14 +35,15 @@ function reducer(state, action) {
 export const UserDispatch = createContext(null);
 
 function App() {
-  const [questionSet, dispatch] = useReducer(reducer, INITIAL_QUESTION_SET);
+  // const [questionSet, dispatch] = useReducer(reducer, INITIAL_QUESTION_SET);
+  const { questionSet } = useQuestionStore();
   return (
     <div className="App">
       <Header />
-      <UserDispatch.Provider value={dispatch}>
-        <QuestionGuide />
-        <QAList questionsSet={questionSet} />
-      </UserDispatch.Provider>
+      {/* <UserDispatch.Provider value={dispatch}> */}
+      <QuestionGuide />
+      <QAList questionsSet={questionSet} />
+      {/* </UserDispatch.Provider> */}
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
 import styles from "./QuestionGuide.module.css";
 import { ACTION, UserDispatch } from "../App";
+import { useQuestionStore } from "../store";
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
-  const dispatch = useContext(UserDispatch);
+  // const dispatch = useContext(UserDispatch);
+  const { addQa, addAnswer } = useQuestionStore();
 
   async function requestChat(input) {
     const response = await fetch(
@@ -27,7 +29,8 @@ function QuestionGuide() {
         return;
       } else {
         const answer = new TextDecoder().decode(value);
-        dispatch({ type: ACTION.ADD_ANSWER, set: { question: input, answer } });
+        // dispatch({ type: ACTION.ADD_ANSWER, set: { question: input, answer } });
+        addAnswer();
       }
       return reader.read().then(pump);
     });
@@ -43,7 +46,9 @@ function QuestionGuide() {
       answer: "",
     };
 
-    dispatch({ type: ACTION.ADD_QA, qaSet });
+    // dispatch({ type: ACTION.ADD_QA, qaSet });
+    addQa();
+
     await requestChat(input);
     setInput("");
   };
