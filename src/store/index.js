@@ -15,7 +15,6 @@ export const useChatQAStore = create((set) => ({
   addQuestion: (newQuestion) =>
     set((prev) => {
       prev.lastId++;
-
       return {
         questionSet: [...prev.questionSet, { id: prev.lastId, ...newQuestion }],
       };

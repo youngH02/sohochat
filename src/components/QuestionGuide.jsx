@@ -27,8 +27,8 @@ function QuestionGuide() {
     const reader = response.body.getReader();
     reader.read().then(function pump({ done, value }) {
       if (done) {
-        // setInput("");
-        // setIsDisable(true);
+        setInput("");
+        setIsDisable(false);
         return;
       } else {
         const answer = new TextDecoder().decode(value);
@@ -76,7 +76,7 @@ function QuestionGuide() {
         />
         <button
           onClick={handleClick}
-          // className={isDisable ? styles.changeColor : ""}
+          className={isDisable ? styles.changeColor : ""}
           disabled={isDisable}>
           <img src="resources/send.png" alt="send icon" />
         </button>
