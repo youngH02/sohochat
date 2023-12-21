@@ -1,25 +1,57 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "./QuestionGuide.module.css";
-import { UserDispatch } from "../App";
+
+import { useChatQAStore } from "../store";
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
-  const dispatch = useContext(UserDispatch);
+  const { addQuestion, addAnswer } = useChatQAStore();
+  const [isDisable, setIsDisable] = useState(false);
+
+  async function requestChat(input) {
+    setIsDisable(true);
+    const response = await fetch(
+      "http://localhost:3002/get-chatgpt-result-stream",
+      {
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: input,
+          model: "chatgpt",
+          uniqueid: "id-1701320901058-0.1831593819aa5",
+        }),
+        method: "POST",
+      }
+    );
+    const reader = response.body.getReader();
+    reader.read().then(function pump({ done, value }) {
+      if (done) {
+        setInput("");
+        setIsDisable(false);
+        return;
+      } else {
+        const answer = new TextDecoder().decode(value);
+        // dispatch({ type: ACTION.ADD_ANSWER, set: { question: input, answer } });
+        addAnswer(answer);
+      }
+      return reader.read().then(pump);
+    });
+  }
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    if (input === "") return;
+    // dispatch({ type: ACTION.ADD_QA, qaSet });
     const qaSet = {
-      //배열에 추가할 객체를 만들기
       question: input,
-      answer: "answertest",
+      answer: "",
     };
-
-    dispatch({ type: "ADD_QA", qaSet });
-
-    setInput("");
+    addQuestion(qaSet);
+    await requestChat(input);
   };
 
   return (
@@ -39,9 +71,13 @@ function QuestionGuide() {
           type="text"
           onChange={handleChange}
           value={input}
+          disabled={isDisable}
           placeholder="질문을 입력해주세요."
         />
-        <button onClick={handleClick}>
+        <button
+          onClick={handleClick}
+          className={isDisable ? styles.changeColor : ""}
+          disabled={isDisable}>
           <img src="resources/send.png" alt="send icon" />
         </button>
       </div>

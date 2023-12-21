@@ -62,6 +62,11 @@
   border-radius: 6.148px;
   border: 1px solid #cbc8cf;
   background: #fff;
+
+  display: flex;
+  justify-content: flex-end;
+
+  white-space: nowrap;
 }
 
 .question_guide input {
@@ -75,7 +80,8 @@
   border: none;
   outline: none;
   float: left;
-  margin: 14.6px auto 14.4px 11px;
+  width: inherit;
+  margin: 14.6px 11px 14.4px 11px;
 }
 
 .question_guide button {
@@ -89,4 +95,11 @@
   float: right;
   margin: 8px 0 8px auto;
   padding: 0;
+
+  &.changeColor {
+    background-color: aqua;
+  }
+  &:disabled {
+    background-color: gray;
+  }
 }
