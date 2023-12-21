@@ -11,23 +11,23 @@ const INITIAL_QUESTION_SET = [
 
 export const useChatQAStore = create((set) => ({
   questionSet: INITIAL_QUESTION_SET,
+  lastId: 1,
   addQuestion: (newQuestion) =>
-    set((prev) => ({
-      questionSet: [
-        ...prev.questionSet,
-        { id: prev.questionSet.length + 1, ...newQuestion },
-      ],
-    })),
+    set((prev) => {
+      prev.lastId++;
+
+      return {
+        questionSet: [...prev.questionSet, { id: prev.lastId, ...newQuestion }],
+      };
+    }),
   addAnswer: (newAnswer) =>
     set((state) => {
       const { questionSet } = state;
-
       const result = questionSet.map((set) =>
         set.id === questionSet.length
           ? { ...set, answer: set.answer + newAnswer }
           : set
       );
-      console.log(result);
       return { questionSet: result };
     }),
 }));

@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "./QuestionGuide.module.css";
 
 import { useChatQAStore } from "../store";
 
 function QuestionGuide() {
   const [input, setInput] = useState("");
-  // const dispatch = useContext(UserDispatch);
   const { addQuestion, addAnswer } = useChatQAStore();
+  const [isDisable, setIsDisable] = useState(false);
 
   async function requestChat(input) {
+    setIsDisable(true);
     const response = await fetch(
       "http://localhost:3002/get-chatgpt-result-stream",
       {
@@ -26,6 +27,8 @@ function QuestionGuide() {
     const reader = response.body.getReader();
     reader.read().then(function pump({ done, value }) {
       if (done) {
+        // setInput("");
+        // setIsDisable(true);
         return;
       } else {
         const answer = new TextDecoder().decode(value);
@@ -41,16 +44,14 @@ function QuestionGuide() {
   };
 
   const handleClick = async () => {
+    if (input === "") return;
+    // dispatch({ type: ACTION.ADD_QA, qaSet });
     const qaSet = {
       question: input,
       answer: "",
     };
-
-    // dispatch({ type: ACTION.ADD_QA, qaSet });
     addQuestion(qaSet);
-
     await requestChat(input);
-    setInput("");
   };
 
   return (
@@ -70,12 +71,15 @@ function QuestionGuide() {
           type="text"
           onChange={handleChange}
           value={input}
+          disabled={isDisable}
           placeholder="질문을 입력해주세요."
         />
-        <button onClick={handleClick}>
+        <button
+          onClick={handleClick}
+          // className={isDisable ? styles.changeColor : ""}
+          disabled={isDisable}>
           <img src="resources/send.png" alt="send icon" />
         </button>
-        {/* <button onClick={test}></button> */}
       </div>
     </div>
   );
